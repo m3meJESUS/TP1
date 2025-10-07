@@ -1,4 +1,6 @@
-package main.java.cal.info;
+package cal.info;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceInventaire {
     private List<Chaussette> chaussettes;

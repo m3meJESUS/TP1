@@ -1,4 +1,4 @@
-package main.java.cal.info;
+package cal.info;
 
 public class Chaussette {
     private int identifiant;
