@@ -3,6 +3,9 @@ import com.sun.net.httpserver.HttpServer;
 import java.net.InetSocketAddress;
 import cal.info.Handlers.InventaireHandler;
 import cal.info.Handlers.VenteHandler;
+import java.io.IOException;
+import cal.info.ServiceInventaire;
+import cal.info.ServiceVente;
 
 
 public class App 

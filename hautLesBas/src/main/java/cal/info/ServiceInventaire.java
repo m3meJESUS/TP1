@@ -3,32 +3,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceInventaire {
-    private List<Chaussette> chaussettes;
+    private List<Chaussette> Inventaire = new ArrayList<>();
 
-    public ServiceInventaire() {
-        this.chaussettes = new ArrayList<>();
-    }
 
     public void ajouterChaussette(Chaussette c) {
-        chaussettes.add(c);
+        Inventaire.add(c);
     }
 
     public void supprimerChaussette(int id) {
-        for (Chaussette c : chaussettes) {
+        for (Chaussette c : Inventaire) {
             if (c.getIdentifiant() == id) {
-                chaussettes.remove(c);
+                Inventaire.remove(c);
                 break;
             }
         }
     }
 
     public List<Chaussette> listerChaussettes() {
-        return chaussettes;
+        return Inventaire;
     }
 
     public List<Chaussette> rechercherChaussette(String couleur, String taille) {
         List<Chaussette> result = new ArrayList<>();
-        for (Chaussette c : chaussettes) {
+        for (Chaussette c : Inventaire) {
             if (c.getCouleur().equals(couleur) && c.getTaille().equals(taille)) {
                 result.add(c);
             }
