@@ -42,6 +42,7 @@ public class Vente {
     public void setIdentifiant(int identifiant) {
         this.identifiant = identifiant;
     }
+    
     @Override
     public String toString() {
         return "Vente [identifiant=" + identifiant + ", dateVente=" + dateVente + ", total=" + total + ", chaussettes=" + chaussettes + "]";

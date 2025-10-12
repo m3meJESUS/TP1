@@ -36,5 +36,13 @@ public class ServiceVente {
     public String toString() {
         return "ServiceVente [ventes=" + ventes + "]";
     }
+    public boolean venteExiste(int id) {
+        for (Vente v : ventes) {
+            if (v.getIdentifiant() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 

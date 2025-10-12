@@ -5,7 +5,6 @@ import cal.info.Vente;
 import cal.info.Chaussette;
 import cal.info.ServiceVente;
 import java.io.*;
-import java.util.List;
 import cal.info.ServiceInventaire;
 
 
@@ -42,6 +41,9 @@ public class VenteHandler implements HttpHandler{
                         }
                     }
                     if(!response.equals("Une des chaussettes n'existe pas dans l'inventaire")){
+                        for(Chaussette c : vente.getChaussettes()){
+                            serviceInventaire.supprimerChaussette(c.getIdentifiant());
+                        }   
                         serviceVente.ajouterVente(vente);
                         response = "Vente ajoutee";
                     }
@@ -53,8 +55,15 @@ public class VenteHandler implements HttpHandler{
                 if (exchange.getRequestURI().getPath().contains("/vente")) {
                     String query = exchange.getRequestURI().getQuery();
                     int id = Integer.parseInt(query.split("=")[1]);
-                    serviceVente.annulerVente(id);
-                    response = "Vente annulee";
+                    if(serviceVente.venteExiste(id)){
+                        for(Chaussette c : serviceVente.rechercherVente(id).getChaussettes()){
+                            serviceInventaire.ajouterChaussette(c);
+                        }
+                         serviceVente.annulerVente(id);
+                        response = "Vente annulee";
+                    }
+                    else
+                        response = "Vente n'existe pas";
                 }
                 break;
 

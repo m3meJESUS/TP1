@@ -41,12 +41,4 @@ public class ServiceInventaire {
         }
         return false;
     }
-    public void choisirChaussette(int id) {
-        for (Chaussette c : Inventaire) {
-            if (c.getIdentifiant() == id) {
-                Inventaire.remove(c);
-                break;
-            }
-        }
-    }
 }

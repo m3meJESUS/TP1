@@ -53,8 +53,21 @@ public class InventaireHandler implements HttpHandler {
                 break;
 
             case "PUT":
-                
-                break;
+                Gson gsonPut = new Gson();
+                Chaussette chaussetteModifiee = gsonPut.fromJson(new InputStreamReader(exchange.getRequestBody()), Chaussette.class);
+                if(exchange.getRequestURI().getPath().contains("/inventaire")){
+                    if(serviceInventaire.existeDeja(chaussetteModifiee)){
+                        serviceInventaire.supprimerChaussette(chaussetteModifiee.getIdentifiant());
+                        serviceInventaire.ajouterChaussette(chaussetteModifiee);
+                        response = "Chaussette a ete modifiee";
+                        break;
+                    }
+                    else{
+                        response = "Chaussette n'existe pas";
+                        break;
+                    }
+                }
+            break;
         }
 
 
