@@ -15,37 +15,45 @@ public class InventaireHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
     
-        String response = "Service Inventaire is running";
+        String response = serviceInventaire.listerChaussettes().toString();
         String methodEchange = exchange.getRequestMethod();
 
         switch (methodEchange) {
             case "GET":
-                List <Chaussette> inventaire = serviceInventaire.listerChaussettes();
-                Gson gsonGet = new Gson();
-                response = gsonGet.toJson(inventaire);
+                if (exchange.getRequestURI().getPath().contains("/inventaire")) {
+                   serviceInventaire.listerChaussettes();
+                }
                 System.out.println(response);
-
-
                 break;
             
             case "POST":
                 Gson gsonPost = new Gson();
                 Chaussette laChaussette = gsonPost.fromJson(new InputStreamReader(exchange.getRequestBody()), Chaussette.class);
-                serviceInventaire.ajouterChaussette(laChaussette);
-                response = "Chaussette added";
-                System.out.println(response);
-
-                //serviceInventaire.ajouterChaussette(exchange);
-
+                
+                if(serviceInventaire.existeDeja(laChaussette)){
+                    response = "Chaussette existe deja";
+                    break;
+                }
+                else{
+                    serviceInventaire.ajouterChaussette(laChaussette);
+                    response = "Chaussette a ete ajoutee";
+                    System.out.println(response);
+                }
                 break;
-
+            //dans le url il faut mettre ?id=1
             case "DELETE":
-
-
+                 if (exchange.getRequestURI().getPath().contains("/inventaire")) {
+                    String query = exchange.getRequestURI().getQuery();
+                    int id = Integer.parseInt(query.split("=")[1]);
+                    serviceInventaire.supprimerChaussette(id);
+                    response = "Chaussette a ete supprimee";
+                    System.out.println(response);
+                    break;
+                }
                 break;
 
             case "PUT":
-            
+                
                 break;
         }
 

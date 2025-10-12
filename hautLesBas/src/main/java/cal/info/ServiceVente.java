@@ -3,9 +3,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceVente {
-    private List<Vente> ventes;
+    private List<Vente> ventes = new ArrayList<>();
 
-    public void creerVente(Vente v) {
+    public ServiceVente() {
         this.ventes = new ArrayList<>();
     }
 
@@ -29,6 +29,12 @@ public class ServiceVente {
             }
         }
         return null;
+    }
+    public void ajouterVente(Vente v) {
+        ventes.add(v);
+    }
+    public String toString() {
+        return "ServiceVente [ventes=" + ventes + "]";
     }
 }
 

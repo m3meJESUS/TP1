@@ -16,7 +16,8 @@ public class App
         ServiceVente serviceVente = new ServiceVente();
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
         server.createContext("/inventaire", new InventaireHandler(serviceInventaire));
-        server.createContext("/vente", new VenteHandler(serviceVente));
+        server.createContext("/vente", new VenteHandler(serviceVente, serviceInventaire));
+        
         server.setExecutor(null); 
         server.start();
         System.out.println("Server started on port 8080");

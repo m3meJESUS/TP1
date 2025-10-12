@@ -32,4 +32,21 @@ public class ServiceInventaire {
         }
         return result;
     }
+
+    public boolean existeDeja(Chaussette c) {
+        for (Chaussette chaussette : Inventaire) {
+            if (chaussette.getIdentifiant() == c.getIdentifiant()) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public void choisirChaussette(int id) {
+        for (Chaussette c : Inventaire) {
+            if (c.getIdentifiant() == id) {
+                Inventaire.remove(c);
+                break;
+            }
+        }
+    }
 }
