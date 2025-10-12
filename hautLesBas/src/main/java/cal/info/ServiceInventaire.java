@@ -41,4 +41,13 @@ public class ServiceInventaire {
         }
         return false;
     }
+    public List<Chaussette>  rechercherChaussettes(String couleur, String taille) {
+        List<Chaussette> result = new ArrayList<>();
+        for (Chaussette c : Inventaire) {
+            if (c.getCouleur().equals(couleur) && c.getTaille().equals(taille)) {
+                result.add(c);
+            }
+        }
+        return result;
+    }
 }

@@ -66,11 +66,6 @@ public class VenteHandler implements HttpHandler{
                         response = "Vente n'existe pas";
                 }
                 break;
-
-            case "PUT":
-                
-            
-                break;
         }
 
 

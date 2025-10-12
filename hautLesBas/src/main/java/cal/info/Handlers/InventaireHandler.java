@@ -3,7 +3,6 @@ import com.sun.net.httpserver.*;
 import cal.info.Chaussette;
 import cal.info.ServiceInventaire;
 import java.io.*;
-import java.util.List;
 import com.google.gson.Gson;
 
 public class InventaireHandler implements HttpHandler {
@@ -20,7 +19,27 @@ public class InventaireHandler implements HttpHandler {
 
         switch (methodEchange) {
             case "GET":
-                if (exchange.getRequestURI().getPath().contains("/inventaire")) {
+                if (exchange.getRequestURI().getPath().contains("/inventaire") && exchange.getRequestURI().getQuery() != null) {
+                    String query = exchange.getRequestURI().getQuery();
+                    String[] params = query.split("&");
+                    String couleur = null;
+                    String taille = null;
+                    for (String param : params) {
+                        String[] keyValue = param.split("=");
+                        if (keyValue[0].equals("couleur")) {
+                            couleur = keyValue[1];
+                        } else if (keyValue[0].equals("taille")) {
+                            taille = keyValue[1];
+                        }
+                    }
+                    if (couleur != null && taille != null) {
+                        response = serviceInventaire.rechercherChaussettes(couleur, taille).toString();
+                    } else {
+                        response = "Parametres manquants";
+                    }
+
+                }
+                else if(exchange.getRequestURI().getPath().contains("/inventaire")) {
                    serviceInventaire.listerChaussettes();
                 }
                 System.out.println(response);
