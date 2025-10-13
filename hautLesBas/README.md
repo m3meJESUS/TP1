@@ -64,15 +64,11 @@ Pré-requis : serveur lancé sur `http://localhost:8080`.
 
 - GET /inventaire — vérifier que la chaussette 200 apparaît :
 
-```bash
-curl "http://localhost:8080/inventaire"
-```
+Postman : créer une requête GET vers `http://localhost:8080/inventaire` et cliquer sur Send.
 
 - GET /inventaire?couleur=rose&taille=M — recherche exacte :
 
-```bash
-curl "http://localhost:8080/inventaire?couleur=rose&taille=M"
-```
+Postman : créer une requête GET vers `http://localhost:8080/inventaire?couleur=rose&taille=M` et cliquer sur Send.
 
 - PUT /inventaire (mettre à jour 200) — Body JSON :
 
@@ -88,11 +84,10 @@ curl "http://localhost:8080/inventaire?couleur=rose&taille=M"
 
 - DELETE /inventaire?id=200 — supprimer la chaussette :
 
-```bash
-curl -X DELETE "http://localhost:8080/inventaire?id=200"
-```
+Postman : créer une requête DELETE vers `http://localhost:8080/inventaire?id=200` et cliquer sur Send.
 
 - POST /vente (créer vente qui référence 200 et 201) — Body JSON :
+
 
 ```json
 {
@@ -105,31 +100,7 @@ curl -X DELETE "http://localhost:8080/inventaire?id=200"
 	]
 }
 ```
-
-## Ajout de vente valide (abrégé)
-
-Étapes minimales :
-
-1. Ajouter les chaussettes référencées (200 et 201) si elles n'existent pas :
-
-```bash
-curl -X POST "http://localhost:8080/inventaire" -H "Content-Type: application/json" -d '{"identifiant":200,"couleur":"rose","taille":"M","typeTissu":"laine","prix":8.5}'
-curl -X POST "http://localhost:8080/inventaire" -H "Content-Type: application/json" -d '{"identifiant":201,"couleur":"gris","taille":"M","typeTissu":"coton","prix":6.5}'
-```
-
-2. Poster la vente :
-
-```bash
-curl -X POST "http://localhost:8080/vente" -H "Content-Type: application/json" -d '{"identifiant":10,"dateVente":"2025-10-13T12:00:00Z","total":15.0,"chaussettes":[{"identifiant":200},{"identifiant":201}] }'
-```
-
-3. Vérifier :
-
-```bash
-curl "http://localhost:8080/vente"
-```
-
-Réponse attendue : `Vente ajoutee` puis la vente listée par GET /vente.
-
-
+- Postman : créer une requête DELETE vers `http://localhost:8080/vente?id=10` et cliquer sur Send.
+- Postman : créer une requête GET vers `http://localhost:8080/inventaire` et cliquer sur Send.
+- Postman : créer une requête GET vers `http://localhost:8080/vente` et cliquer sur Send.
 
