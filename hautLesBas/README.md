@@ -106,5 +106,30 @@ curl -X DELETE "http://localhost:8080/inventaire?id=200"
 }
 ```
 
-> Note : la vente ne sera acceptée que si les chaussettes 200 et 201 existent dans l'inventaire (service vérifie `existeDeja`).
+## Ajout de vente valide (abrégé)
+
+Étapes minimales :
+
+1. Ajouter les chaussettes référencées (200 et 201) si elles n'existent pas :
+
+```bash
+curl -X POST "http://localhost:8080/inventaire" -H "Content-Type: application/json" -d '{"identifiant":200,"couleur":"rose","taille":"M","typeTissu":"laine","prix":8.5}'
+curl -X POST "http://localhost:8080/inventaire" -H "Content-Type: application/json" -d '{"identifiant":201,"couleur":"gris","taille":"M","typeTissu":"coton","prix":6.5}'
+```
+
+2. Poster la vente :
+
+```bash
+curl -X POST "http://localhost:8080/vente" -H "Content-Type: application/json" -d '{"identifiant":10,"dateVente":"2025-10-13T12:00:00Z","total":15.0,"chaussettes":[{"identifiant":200},{"identifiant":201}] }'
+```
+
+3. Vérifier :
+
+```bash
+curl "http://localhost:8080/vente"
+```
+
+Réponse attendue : `Vente ajoutee` puis la vente listée par GET /vente.
+
+
 
