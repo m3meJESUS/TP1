@@ -25,7 +25,7 @@ mvn clean
 Lancer l'application (classe principale `cal.info.App`):
 
 ```powershell
-mvn compile; mvn exec:java -Dexec.mainClass="cal.info.App"
+mvn compile; run le fichier app.java
 ```
 
 Le serveur démarre sur `http://localhost:8080`.
@@ -57,8 +57,20 @@ Pré-requis : serveur lancé sur `http://localhost:8080`.
 	"identifiant": 200,
 	"couleur": "rose",
 	"taille": "M",
+	"typeTissu": "laine",
+	"prix": 9.5
+}
+```
+
+- POST /inventaire (ajouter une chaussette) — Body JSON :
+
+```json
+{
+	"identifiant": 201,
+	"couleur": "bleu",
+	"taille": "M",
 	"typeTissu": "coton",
-	"prix": 7.0
+	"prix": 6.5
 }
 ```
 
@@ -70,7 +82,7 @@ Postman : créer une requête GET vers `http://localhost:8080/inventaire` et cli
 
 Postman : créer une requête GET vers `http://localhost:8080/inventaire?couleur=rose&taille=M` et cliquer sur Send.
 
-- PUT /inventaire (mettre à jour 200) — Body JSON :
+- PUT /inventaire (mettre à jour 200) `http://localhost:8080/inventaire?id=200` — Body JSON :
 
 ```json
 {
@@ -86,6 +98,18 @@ Postman : créer une requête GET vers `http://localhost:8080/inventaire?couleur
 
 Postman : créer une requête DELETE vers `http://localhost:8080/inventaire?id=200` et cliquer sur Send.
 
+- POST /inventaire (ajouter une chaussette) — Body JSON :
+
+```json
+{
+	"identifiant": 200,
+	"couleur": "rose",
+	"taille": "M",
+	"typeTissu": "laine",
+	"prix": 8.5
+}
+```
+
 - POST /vente (créer vente qui référence 200 et 201) — Body JSON :
 
 
@@ -96,10 +120,11 @@ Postman : créer une requête DELETE vers `http://localhost:8080/inventaire?id=2
 	"total": 15.0,
 	"chaussettes": [
 		{ "identifiant": 200, "couleur": "rose", "taille": "M", "typeTissu": "laine", "prix": 8.5 },
-		{ "identifiant": 201, "couleur": "gris", "taille": "M", "typeTissu": "coton", "prix": 6.5 }
+		{ "identifiant": 201, "couleur": "bleu", "taille": "M", "typeTissu": "coton", "prix": 6.5 }
 	]
 }
 ```
+- Postman : créer une requête GET vers `http://localhost:8080/vente` et cliquer sur Send.
 - Postman : créer une requête DELETE vers `http://localhost:8080/vente?id=10` et cliquer sur Send.
 - Postman : créer une requête GET vers `http://localhost:8080/inventaire` et cliquer sur Send.
 - Postman : créer une requête GET vers `http://localhost:8080/vente` et cliquer sur Send.
