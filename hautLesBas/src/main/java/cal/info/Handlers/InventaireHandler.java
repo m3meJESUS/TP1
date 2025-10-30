@@ -33,6 +33,8 @@ public class InventaireHandler implements HttpHandler {
                         }
                     }
                     if (couleur != null && taille != null) {
+
+                        // Serialisation des objets recus svp
                         response = serviceInventaire.rechercherChaussettes(couleur, taille).toString();
                     } else {
                         response = "Parametres manquants";
@@ -40,6 +42,8 @@ public class InventaireHandler implements HttpHandler {
 
                 }
                 else if(exchange.getRequestURI().getPath().contains("/inventaire")) {
+
+                    // Tu fais quoi des chaussettes ?
                    serviceInventaire.listerChaussettes();
                 }
                 System.out.println(response);
@@ -47,6 +51,8 @@ public class InventaireHandler implements HttpHandler {
             
             case "POST":
                 Gson gsonPost = new Gson();
+
+                // ok
                 Chaussette laChaussette = gsonPost.fromJson(new InputStreamReader(exchange.getRequestBody()), Chaussette.class);
                 
                 if(serviceInventaire.existeDeja(laChaussette)){
@@ -61,7 +67,7 @@ public class InventaireHandler implements HttpHandler {
                 break;
             //dans le url il faut mettre ?id=1
             case "DELETE":
-                 if (exchange.getRequestURI().getPath().contains("/inventaire")) {
+                 if (exchange.getRequestURI().getPath().contains("/inventaire")) { // Pourquoi ?
                     String query = exchange.getRequestURI().getQuery();
                     int id = Integer.parseInt(query.split("=")[1]);
                     serviceInventaire.supprimerChaussette(id);

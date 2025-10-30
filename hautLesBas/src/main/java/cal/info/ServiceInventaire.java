@@ -23,15 +23,15 @@ public class ServiceInventaire {
         return Inventaire;
     }
 
-    public List<Chaussette> rechercherChaussette(String couleur, String taille) {
-        List<Chaussette> result = new ArrayList<>();
-        for (Chaussette c : Inventaire) {
-            if (c.getCouleur().equals(couleur) && c.getTaille().equals(taille)) {
-                result.add(c);
-            }
-        }
-        return result;
-    }
+//    public List<Chaussette> rechercherChaussette(String couleur, String taille) {
+//        List<Chaussette> result = new ArrayList<>();
+//        for (Chaussette c : Inventaire) {
+//            if (c.getCouleur().equals(couleur) && c.getTaille().equals(taille)) {
+//                result.add(c);
+//            }
+//        }
+//        return result;
+//    }
 
     public boolean existeDeja(Chaussette c) {
         for (Chaussette chaussette : Inventaire) {

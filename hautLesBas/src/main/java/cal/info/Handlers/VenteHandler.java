@@ -13,6 +13,8 @@ import cal.info.ServiceInventaire;
 public class VenteHandler implements HttpHandler{
     public final ServiceVente serviceVente;
     public final ServiceInventaire serviceInventaire;
+
+    // Super facon d'instancier les classes de type service
     public VenteHandler(ServiceVente serviceVente, ServiceInventaire serviceInventaire) {
         this.serviceVente = serviceVente;
         this.serviceInventaire = serviceInventaire;
@@ -26,6 +28,7 @@ public class VenteHandler implements HttpHandler{
             case "GET":
                 if (exchange.getRequestURI().getPath().contains("/vente")) {
                    serviceVente.listerVentes();
+                   // et ?
                 }
                 break;
             
@@ -41,6 +44,9 @@ public class VenteHandler implements HttpHandler{
                         }
                     }
                     if(!response.equals("Une des chaussettes n'existe pas dans l'inventaire")){
+
+                        // Excellant tout ca
+
                         for(Chaussette c : vente.getChaussettes()){
                             serviceInventaire.supprimerChaussette(c.getIdentifiant());
                         }   
